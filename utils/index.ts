@@ -24,12 +24,12 @@ export async function getPositionId({
         outcomeArray.splice(outcomeIndex, 1, 1);
         const binary: string = outcomeArray.reverse().join("");
         const indexSet: number = parseInt(binary, 2);
-        const collectionId: string = await contract.methods
-            .getCollectionId(parentCollectionId, market.conditionId, indexSet)
-            .call();
-        const positionId: string = await contract.methods
-            .getPositionId(collateralToken, collectionId)
-            .call();
+        const collectionId: string = await contract
+            .getCollectionId(parentCollectionId, market.conditionId, indexSet);
+            
+        const positionId: string = await contract
+            .getPositionId(collateralToken, collectionId);
+
         return setPositionId(positionId);
     } catch (error) {
         setErrorMessage(error.message);
@@ -49,9 +49,8 @@ export async function getBalance({
     setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }): Promise<void> {
     try {
-        const balance: string = await contract.methods
-            .balanceOf(address, positionId)
-            .call();
+        const balance: string = await contract
+            .balanceOf(address, positionId);
         return setBalance((+balance / 1000000).toFixed(6));
     } catch (error) {
         return setErrorMessage(error.message);

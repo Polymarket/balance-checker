@@ -1,11 +1,11 @@
-import Web3 from "web3";
+import { ethers } from "ethers";
 
 const MATIC_NODE: string = "wss://rpc-mainnet.maticvigil.com/ws";
-const web3 = new Web3(MATIC_NODE);
+const provider = new ethers.providers.WebSocketProvider(MATIC_NODE);
 const { abi } = require("./ConditionalTokens.json");
-
 const CONTRACT_ADDRESS: string = "0x4D97DCd97eC945f40cF65F87097ACe5EA0476045";
-export const contract = new web3.eth.Contract(abi, CONTRACT_ADDRESS);
+
+export const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider);
 export const parentCollectionId: string =
     "0x0000000000000000000000000000000000000000000000000000000000000000";
 export const collateralToken = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
