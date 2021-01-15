@@ -8,7 +8,7 @@ type ModalProps = {
     setAddress: React.Dispatch<React.SetStateAction<string>>;
     setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
     question: string;
-    outcome: string;
+    outcomeText: string;
     errorMessage: string;
     address: string;
     balance: string | undefined;
@@ -21,7 +21,7 @@ const BalanceModal: React.FC<ModalProps> = ({
     setAddress,
     setErrorMessage,
     question,
-    outcome,
+    outcomeText,
     errorMessage,
     address,
     balance,
@@ -35,10 +35,10 @@ const BalanceModal: React.FC<ModalProps> = ({
             <Form onSubmit={handleSubmit}>
                 <Modal.Body>
                     <h6> {question} </h6>
-                    <p>
+                    <h6>
                         Enter a customer's address to get their balance for
-                        position: <h6>{outcome}</h6>
-                    </p>
+                        position: {outcomeText}
+                    </h6>
                     <Form.Group>
                         <Form.Label>Address</Form.Label>
                         <Form.Control

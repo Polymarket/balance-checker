@@ -12,7 +12,7 @@ type Props = {
 const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
     const [show, setShow] = useState(false);
     const [address, setAddress] = useState("");
-    const [outcome, setOutcome] = useState("");
+    const [outcomeText, setOutcomeText] = useState("");
     const [question, setQuestion] = useState("");
     const [positionId, setPositionId] = useState("");
     const [balance, setBalance] = useState<string | undefined>(undefined);
@@ -29,10 +29,10 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
         return setShow(true);
     }
 
-    function handleClick({ market }: { market: Market }): void {
+    function handleClick({ market, outcome }: { market: Market; outcome: string }): void {
         getPositionId({ market, outcome, setPositionId, setErrorMessage });
         setQuestion(market.question);
-        setOutcome(outcome);
+        setOutcomeText(outcome);
         return handleShow();
     }
     async function handleSubmit(
@@ -50,7 +50,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
                 setAddress={setAddress}
                 setErrorMessage={setErrorMessage}
                 question={question}
-                outcome={outcome}
+                outcomeText={outcomeText}
                 errorMessage={errorMessage}
                 address={address}
                 balance={balance}
