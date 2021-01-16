@@ -1,32 +1,39 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Form, Button, Alert, Modal } from "react-bootstrap";
+import { getBalance } from "../utils";
 
 type PropsFunction = () => void;
 type ModalProps = {
     handleClose: PropsFunction;
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
     setAddress: React.Dispatch<React.SetStateAction<string>>;
     setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
     question: string;
     outcomeText: string;
     errorMessage: string;
     address: string;
-    balance: string | undefined;
+    positionId: string;
     show: boolean;
 };
 
 const BalanceModal: React.FC<ModalProps> = ({
     handleClose,
-    handleSubmit,
     setAddress,
     setErrorMessage,
     question,
     outcomeText,
     errorMessage,
     address,
-    balance,
+    positionId,
     show,
 }): JSX.Element => {
+    const [balance, setBalance] = useState<string | undefined>(undefined);
+
+    async function handleSubmit(
+        e: React.FormEvent<HTMLFormElement>,
+    ): Promise<string> {
+        e.preventDefault();
+        return getBalance({ address, positionId, setBalance, setErrorMessage });
+    }
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

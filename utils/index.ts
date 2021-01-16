@@ -5,6 +5,14 @@ import {
     collateralToken,
 } from "./constants";
 
+/** 
+ * getPositionId
+ * This function is called by clicking on an outcome. It gets the position Id for that outcome
+ * @param {Market} market - the market object
+ * @param {string} outcome - name of the outcome
+ * @param {func} setPositionId - parent state setter for positionId
+ * @param {func} setErrorMessage - parent state setter for errorMessage
+ * */
 export async function getPositionId({
     market,
     outcome,
@@ -37,6 +45,15 @@ export async function getPositionId({
     }
 }
 
+
+/** 
+ * getBalance
+ * This function is called by clicking submit in the modal. It gets the balance of the provided address.
+ * @param {string} address - should be customers Polymarket account address, not their wallet address
+ * @param {string} positionId - the id for the position returned from getPositionId
+ * @param {func} setBalance - component state setter for positionId
+ * @param {func} setErrorMessage - parent state setter for errorMessage
+ * */
 export async function getBalance({
     address,
     positionId,
@@ -47,15 +64,25 @@ export async function getBalance({
     positionId: string;
     setBalance: React.Dispatch<React.SetStateAction<string | undefined>>;
     setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
-}): Promise<void> {
+}): Promise<string> {
     try {
         const balance: string = await contract
             .balanceOf(address, positionId);
-        return setBalance((+balance / 1000000).toFixed(6));
+       setBalance((+balance / 1000000).toFixed(6));
+       return balance;
     } catch (error) {
-        return setErrorMessage(error.message);
+         setErrorMessage(error.message);
+         return (error.message)
     }
 }
+
+/** 
+ * searchMarkets
+ * This function is called by typing in the search input. It searches market questions and descriptions for matches
+ * @param {array} object - the array of market objects fetched by getStaticProps from the api
+ * @param {array} properties - keys for the properties of the market objects
+ * @param {string} query - the text in the search input
+ * */
 
 export function searchMarkets<data>(
     object: data,

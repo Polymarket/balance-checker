@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { Market } from "../utils/constants";
-import { getPositionId, getBalance } from "../utils";
+import { getPositionId } from "../utils";
 import BalanceModal from "../components/modal";
 import SearchInput from "../components/searchInput";
 import ActiveMarkets from "../components/activeMarkets";
 
-type Props = {
+export type Props = {
     data: Market[];
 };
 const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
@@ -15,13 +15,12 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
     const [outcomeText, setOutcomeText] = useState("");
     const [question, setQuestion] = useState("");
     const [positionId, setPositionId] = useState("");
-    const [balance, setBalance] = useState<string | undefined>(undefined);
     const [errorMessage, setErrorMessage] = useState("");
     const [query, setQuery] = useState("");
 
     function handleClose(): void {
         setShow(false);
-        setBalance(undefined);
+        
         return setErrorMessage("");
     }
 
@@ -35,25 +34,19 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
         setOutcomeText(outcome);
         return handleShow();
     }
-    async function handleSubmit(
-        e: React.FormEvent<HTMLFormElement>,
-    ): Promise<void> {
-        e.preventDefault();
-        return getBalance({ address, positionId, setBalance, setErrorMessage });
-    }
+
 
     return (
         <Container>
             <BalanceModal
                 handleClose={handleClose}
-                handleSubmit={handleSubmit}
                 setAddress={setAddress}
                 setErrorMessage={setErrorMessage}
                 question={question}
                 outcomeText={outcomeText}
                 errorMessage={errorMessage}
                 address={address}
-                balance={balance}
+                positionId={positionId}
                 show={show}
             />
             <Row style={{ paddingTop: "50px", textAlign: "center" }}>

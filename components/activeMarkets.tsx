@@ -28,8 +28,8 @@ const ActiveMarkets: React.FC<Props> = ({
 
     const marketElements = resultMarkets.map((market: Market) => {
         return (
-            <Col md={4} style={{ paddingTop: "10px" }}>
-                <Card border="dark" style={{ height: "100%" }}>
+            <Col md={4} key={market.id} style={{ paddingTop: "10px" }}>
+                <Card border="dark"  style={{ height: "100%" }}>
                     <Card.Text style={{ height: "30%" }}>
                         {market.question}
                     </Card.Text>
@@ -39,6 +39,7 @@ const ActiveMarkets: React.FC<Props> = ({
                                 <a
                                     role="button"
                                     tabIndex={0}
+                                    key={outcome}
                                     style={{ cursor: "pointer" }}
                                     onClick={() =>
                                         handleClick({ market, outcome })
