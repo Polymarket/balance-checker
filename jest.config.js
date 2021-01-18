@@ -4,7 +4,7 @@ module.exports = {
       "<rootDir>"
     ],
     "preset": "ts-jest",
-    "setupFilesAfterEnv": ["<rootDir>/setupTests.ts"],
+
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
@@ -16,7 +16,7 @@ module.exports = {
             tsconfig: "<rootDir>/tsconfig.jest.json"
         }
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+   
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -26,5 +26,5 @@ module.exports = {
       "node"
     ],
     "testPathIgnorePatterns": ["<rootDir>/.next/", "<rootDir>/node_modules/"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+ 
   }

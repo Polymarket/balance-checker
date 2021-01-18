@@ -1,7 +1,7 @@
 
-import { getBalance, getCollectionId, getIndexSet, getPositionId, searchMarkets } from "../utils";
+import { getBalance, getCollectionId, getIndexSet, getPositionId, searchMarkets } from "./";
 import { mockMarket } from "./mockData";
-import { Market, collateralToken, parentCollectionId } from "../utils/constants";
+import { Market, collateralToken, parentCollectionId } from "./constants";
 
 
 describe("getIndexSet", () => {
@@ -22,8 +22,7 @@ describe("getCollectionID", () => {
         const collectionId = await getCollectionId({  parentCollectionId,
             conditionId,
             indexSet});
-         
-        console.log(collectionId)
+    
         expect(collectionId).toEqual(
             "0x59372f5e88a65e6d1a99de812b5e3cf2a0264002bea95cd4907231a81a8d8cca",
         );
