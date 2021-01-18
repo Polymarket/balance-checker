@@ -23,7 +23,7 @@ export async function getPositionId({
     outcome: string;
     setPositionId: React.Dispatch<React.SetStateAction<string>>;
     setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
-}): Promise<void> {
+}): Promise<string> {
     try {
         const outcomeArray: number[] = new Array(market.outcomes.length).fill(
             0,
@@ -37,8 +37,8 @@ export async function getPositionId({
             
         const positionId: string = await contract
             .getPositionId(collateralToken, collectionId);
-
-        return setPositionId(positionId);
+            setPositionId(positionId);
+        return positionId
     } catch (error) {
         setErrorMessage(error.message);
         return error.message;
@@ -79,9 +79,9 @@ export async function getBalance({
 /** 
  * searchMarkets
  * This function is called by typing in the search input. It searches market questions and descriptions for matches
- * @param {array} object - the array of market objects fetched by getStaticProps from the api
- * @param {array} properties - keys for the properties of the market objects
- * @param {string} query - the text in the search input
+ * @param {Array} object - the array of market objects fetched by getStaticProps from the api
+ * @param {Array} properties - keys for the properties of the market objects
+ * @param {string} query - the text coming from the search input
  * */
 
 export function searchMarkets<data>(

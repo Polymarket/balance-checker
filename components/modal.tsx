@@ -54,7 +54,7 @@ const BalanceModal: React.FC<ModalProps> = ({
                             onChange={(e) => setAddress(e.currentTarget.value)}
                         />
                     </Form.Group>
-                    {balance && <p>Customer Balance: {balance}</p>}
+                    {balance && <p className="balance">Customer Balance: {balance}</p>}
                     {errorMessage && (
                         <Alert
                             variant="danger"
@@ -72,7 +72,7 @@ const BalanceModal: React.FC<ModalProps> = ({
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" type="submit">
+                    <Button id="submit-button" variant="primary" type="submit">
                         Submit
                     </Button>
                 </Modal.Footer>
