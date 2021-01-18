@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { Market } from "../utils/constants";
-import { getPositionId } from "../utils";
+import { Market, parentCollectionId, collateralToken } from "../utils/constants";
+import { getIndexSet, getCollectionId, getPositionId } from "../utils";
 import BalanceModal from "../components/modal";
 import SearchInput from "../components/searchInput";
 import ActiveMarkets from "../components/activeMarkets";
@@ -10,42 +10,33 @@ export type Props = {
     data: Market[];
 };
 const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
-    const [show, setShow] = useState(false);
-    const [address, setAddress] = useState("");
-    const [outcomeText, setOutcomeText] = useState("");
-    const [question, setQuestion] = useState("");
-    const [positionId, setPositionId] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+     const [show, setShow] = useState<boolean>(false);
+     const [outcomeName, setOutcomeName] = useState<string>("");
+     const [question, setQuestion] = useState<string>("");
+     const [positionId, setPositionId] = useState<string>("");
+    
     const [query, setQuery] = useState("");
 
-    function handleClose(): void {
-        setShow(false);
-        
-        return setErrorMessage("");
-    }
 
-    function handleShow(): void {
-        return setShow(true);
-    }
-
-    function handleClick({ market, outcome }: { market: Market; outcome: string }): void {
-        getPositionId({ market, outcome, setPositionId, setErrorMessage });
+  
+   async function handleClick({ market, outcome }: { market: Market; outcome: string }): Promise<void> {
+        const indexSet = getIndexSet({market, outcome});
+        const conditionId = market.conditionId;
+        const collectionId = await getCollectionId({parentCollectionId, conditionId, indexSet});
+        const positionId = await getPositionId({ collateralToken, collectionId });
+        setPositionId(positionId);
         setQuestion(market.question);
-        setOutcomeText(outcome);
-        return handleShow();
+        setOutcomeName(outcome);
+        setShow(true);
     }
 
 
     return (
         <Container>
             <BalanceModal
-                handleClose={handleClose}
-                setAddress={setAddress}
-                setErrorMessage={setErrorMessage}
+                setShow={setShow}
                 question={question}
-                outcomeText={outcomeText}
-                errorMessage={errorMessage}
-                address={address}
+                outcomeName={outcomeName}
                 positionId={positionId}
                 show={show}
             />

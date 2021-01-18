@@ -1,9 +1,68 @@
 import {
     Market,
-    contract,
-    parentCollectionId,
-    collateralToken,
+    contract
 } from "./constants";
+
+/** 
+ * @property {function} getIndexSet
+ * This function is called by clicking on an outcome. It gets the position Id for that outcome
+ * @param {Market} market - the market object
+ * @param {string} outcome - name of the outcome
+ * @param {func} setPositionId - parent state setter for positionId
+ * @param {func} setErrorMessage - parent state setter for errorMessage
+ * @returns {string}  the positionId returned by the Conditional Tokens contract
+ * */
+export  function getIndexSet({
+    market,
+    outcome,
+   
+}: {
+    market: Market;
+    outcome: string;
+
+}): number {
+    
+        const outcomeArray: number[] = new Array(market.outcomes.length).fill(
+            0,
+        );
+        const outcomeIndex: number = market.outcomes.indexOf(outcome);
+        outcomeArray.splice(outcomeIndex, 1, 1);
+        const binary: string = outcomeArray.reverse().join("");
+        const indexSet: number = parseInt(binary, 2);
+   
+       
+         
+        return indexSet
+        }
+
+/** 
+ * @property {function} getCollectioinId
+ * This function is called by clicking on an outcome. It gets the position Id for that outcome
+ * @param {Market} market - the market object
+ * @param {string} outcome - name of the outcome
+ * @param {func} setPositionId - parent state setter for positionId
+ * @param {func} setErrorMessage - parent state setter for errorMessage
+ * @returns {string}  the positionId returned by the Conditional Tokens contract
+ * */
+export async function getCollectionId({
+    parentCollectionId,
+    conditionId,
+    indexSet
+   
+}: {
+    parentCollectionId : string,
+    conditionId: string;
+    indexSet: number;
+    
+}): Promise<string> {
+
+      
+        const collectionId: string = await contract
+            .getCollectionId(parentCollectionId, conditionId, indexSet);
+            
+       
+        return collectionId
+    } 
 
 /** 
  * @property {function} getPositionId
@@ -15,36 +74,20 @@ import {
  * @returns {string}  the positionId returned by the Conditional Tokens contract
  * */
 export async function getPositionId({
-    market,
-    outcome,
-    setPositionId,
-    setErrorMessage,
+    collateralToken,
+    collectionId,
+
 }: {
-    market: Market;
-    outcome: string;
-    setPositionId: React.Dispatch<React.SetStateAction<string>>;
-    setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+    collateralToken: string;
+    collectionId: string;
+  
 }): Promise<string> {
-    try {
-        const outcomeArray: number[] = new Array(market.outcomes.length).fill(
-            0,
-        );
-        const outcomeIndex: number = market.outcomes.indexOf(outcome);
-        outcomeArray.splice(outcomeIndex, 1, 1);
-        const binary: string = outcomeArray.reverse().join("");
-        const indexSet: number = parseInt(binary, 2);
-        const collectionId: string = await contract
-            .getCollectionId(parentCollectionId, market.conditionId, indexSet);
-            
-        const positionId: string = await contract
+ 
+   
+          const positionId: string = await contract
             .getPositionId(collateralToken, collectionId);
-            setPositionId(positionId);
         return positionId
-    } catch (error) {
-        setErrorMessage(error.message);
-        return error.message;
-    }
-}
+    } 
 
 
 /** 
@@ -58,25 +101,20 @@ export async function getPositionId({
  * */
 export async function getBalance({
     address,
-    positionId,
-    setBalance,
-    setErrorMessage,
+    positionId
+ 
 }: {
     address: string;
     positionId: string;
-    setBalance: React.Dispatch<React.SetStateAction<string | undefined>>;
-    setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+ 
 }): Promise<string> {
-    try {
+  
         const balance: string = await contract
             .balanceOf(address, positionId);
-       setBalance((+balance / 1000000).toFixed(6));
+       
        return balance;
-    } catch (error) {
-         setErrorMessage(error.message);
-         return (error.message)
-    }
-}
+    } 
+
 
 /** 
  * @property {function}searchMarkets

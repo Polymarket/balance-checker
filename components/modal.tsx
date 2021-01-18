@@ -2,40 +2,40 @@ import React, { useState } from "react";
 import { Form, Button, Alert, Modal } from "react-bootstrap";
 import { getBalance } from "../utils";
 
-type PropsFunction = () => void;
+
 type ModalProps = {
-    handleClose: PropsFunction;
-    setAddress: React.Dispatch<React.SetStateAction<string>>;
-    setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
     question: string;
-    outcomeText: string;
-    errorMessage: string;
-    address: string;
+    outcomeName: string;
     positionId: string;
     show: boolean;
 };
 
 const BalanceModal: React.FC<ModalProps> = ({
-    handleClose,
-    setAddress,
-    setErrorMessage,
+    setShow,
     question,
-    outcomeText,
-    errorMessage,
-    address,
+    outcomeName,
     positionId,
-    show,
+    show
+   
 }): JSX.Element => {
     const [balance, setBalance] = useState<string | undefined>(undefined);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [address, setAddress] = useState("");
 
     async function handleSubmit(
         e: React.FormEvent<HTMLFormElement>,
-    ): Promise<string> {
+    ): Promise<void> {
         e.preventDefault();
-        return getBalance({ address, positionId, setBalance, setErrorMessage });
+        try {
+            const balance = await getBalance({ address, positionId });
+            setBalance((+balance / 1000000).toFixed(6));
+        } catch (error) {
+            setErrorMessage(error.message)
+        }
     }
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={setShow}>
             <Modal.Header closeButton>
                 <Modal.Title>Customer Balance</Modal.Title>
             </Modal.Header>
@@ -44,7 +44,7 @@ const BalanceModal: React.FC<ModalProps> = ({
                     <h6> {question} </h6>
                     <h6>
                         Enter a customer's address to get their balance for
-                        position: {outcomeText}
+                        position: {outcomeName}
                     </h6>
                     <Form.Group>
                         <Form.Label>Address</Form.Label>
@@ -69,7 +69,7 @@ const BalanceModal: React.FC<ModalProps> = ({
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={() => setShow(false)}>
                         Close
                     </Button>
                     <Button id="submit-button" variant="primary" type="submit">
