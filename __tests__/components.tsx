@@ -58,7 +58,7 @@ describe("<BalanceModal/>", () => {
         );
 
         expect(wrap.find(Modal.Title).text()).toBe("Customer Balance");
-        expect(BalanceModal).toMatchSnapshot();
+       
     });
 
     it("should render passed props", async function () {
