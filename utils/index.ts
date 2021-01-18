@@ -12,6 +12,7 @@ import {
  * @param {string} outcome - name of the outcome
  * @param {func} setPositionId - parent state setter for positionId
  * @param {func} setErrorMessage - parent state setter for errorMessage
+ * @returns {string} positionId - the positionId returned by the Conditional Tokens contract
  * */
 export async function getPositionId({
     market,
@@ -53,6 +54,7 @@ export async function getPositionId({
  * @param {string} positionId - the id for the position returned from getPositionId
  * @param {func} setBalance - component state setter for positionId
  * @param {func} setErrorMessage - parent state setter for errorMessage
+ * @returns {string} - balance - customer's balance for the positionId
  * */
 export async function getBalance({
     address,
@@ -82,6 +84,7 @@ export async function getBalance({
  * @param {Array} object - the array of market objects fetched by getStaticProps from the api
  * @param {Array} properties - keys for the properties of the market objects
  * @param {string} query - the text coming from the search input
+*  @returns {boolean} - value indicating if search query was found
  * */
 
 export function searchMarkets<data>(
