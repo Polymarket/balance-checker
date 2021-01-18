@@ -6,13 +6,13 @@ import {
 } from "./constants";
 
 /** 
- * getPositionId
+ * @property {function} getPositionId
  * This function is called by clicking on an outcome. It gets the position Id for that outcome
  * @param {Market} market - the market object
  * @param {string} outcome - name of the outcome
  * @param {func} setPositionId - parent state setter for positionId
  * @param {func} setErrorMessage - parent state setter for errorMessage
- * @returns {string} positionId - the positionId returned by the Conditional Tokens contract
+ * @returns {string}  the positionId returned by the Conditional Tokens contract
  * */
 export async function getPositionId({
     market,
@@ -48,13 +48,13 @@ export async function getPositionId({
 
 
 /** 
- * getBalance
+ * @property {function} getBalance
  * This function is called by clicking submit in the modal. It gets the balance of the provided address.
  * @param {string} address - should be customers Polymarket account address, not their wallet address
  * @param {string} positionId - the id for the position returned from getPositionId
- * @param {func} setBalance - component state setter for positionId
- * @param {func} setErrorMessage - parent state setter for errorMessage
- * @returns {string} - balance - customer's balance for the positionId
+ * @param {function} setBalance - component state setter for positionId
+ * @param {function} setErrorMessage - parent state setter for errorMessage
+ * @returns {string} - customer's balance for the positionId
  * */
 export async function getBalance({
     address,
@@ -79,7 +79,7 @@ export async function getBalance({
 }
 
 /** 
- * searchMarkets
+ * @property {function}searchMarkets
  * This function is called by typing in the search input. It searches market questions and descriptions for matches
  * @param {Array} object - the array of market objects fetched by getStaticProps from the api
  * @param {Array} properties - keys for the properties of the market objects

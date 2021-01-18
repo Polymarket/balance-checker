@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "test": "jest --detectOpenHandles --watchAll=false --forceExit"
+    "test": "jest --detectOpenHandles --watchAll=false --forceExit",
+    "docs": "jsdoc -c jsdoc.json"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
@@ -30,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "better-docs": "^2.3.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
