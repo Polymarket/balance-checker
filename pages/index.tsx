@@ -4,15 +4,14 @@ import { Market } from "../utils/constants";
 import SearchInput from "../components/searchInput";
 import ActiveMarkets from "../components/activeMarkets";
 
- type Props = {
+type Props = {
     data: Market[];
 };
 const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
-   const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("");
 
     return (
         <Container>
-       
             <Row style={{ paddingTop: "50px", textAlign: "center" }}>
                 <Col>
                     <h1>Customer Balances</h1>
@@ -48,7 +47,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
                 <Col md={4} />
                 <Col md={4}>
                     <SearchInput
-                        onChangeSearchQuery={(query) => setQuery(query)}
+                        onChangeSearchQuery={(_query) => setQuery(_query)}
                     />
                 </Col>
                 <Col md={4} />
@@ -61,11 +60,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
                     minWidth: "100%",
                 }}
             >
-                <ActiveMarkets
-                    data={data}
-                    query={query}
-                   
-                />
+                <ActiveMarkets data={data} query={query} />
             </Row>
         </Container>
     );

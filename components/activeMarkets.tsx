@@ -5,30 +5,28 @@ import { searchMarkets } from "../utils";
 import { getModalProps } from "../utils/hooks";
 import BalanceModal from "./modal";
 
-
 type Props = {
     data: Market[];
     query: string;
-  
 };
 
-const ActiveMarkets: React.FC<Props> = ({
-    data,
-    query,
- 
-}): JSX.Element => {
-
+const ActiveMarkets: React.FC<Props> = ({ data, query }): JSX.Element => {
     const [show, setShow] = useState<boolean>(false);
-    const [outcome, setOutcome] = useState<string>("");
+    const [outcomeState, setOutcomeState] = useState<string>("");
     const [question, setQuestion] = useState<string>("");
     const [positionId, setPositionId] = useState<string>("");
 
-
-    async function handleClick({ market, outcome }: { market: Market; outcome: string }): Promise<void> {
-        const _modalProps = await getModalProps({market, outcome})
-        setOutcome(_modalProps.outcomeName);
-        setQuestion(_modalProps.question);
-        setPositionId(_modalProps.positionId);
+    async function handleClick({
+        market,
+        outcome,
+    }: {
+        market: Market;
+        outcome: string;
+    }): Promise<void> {
+        const modalProps = await getModalProps({ market, outcome });
+        setOutcomeState(modalProps.outcomeState);
+        setQuestion(modalProps.question);
+        setPositionId(modalProps.positionId);
         setShow(true);
     }
 
@@ -39,7 +37,7 @@ const ActiveMarkets: React.FC<Props> = ({
     const marketElements = resultMarkets.map((market: Market) => {
         return (
             <Col md={4} key={market.id} style={{ paddingTop: "10px" }}>
-                <Card border="dark"  style={{ height: "100%" }}>
+                <Card border="dark" style={{ height: "100%" }}>
                     <Card.Text style={{ height: "30%" }}>
                         {market.question}
                     </Card.Text>
@@ -68,13 +66,17 @@ const ActiveMarkets: React.FC<Props> = ({
             </Col>
         );
     });
-    return <>
-    <BalanceModal show={show}
-                  setShow={setShow}
-                  outcome={outcome}
-                  question={question}
-                  positionId={positionId}
-    />
-    {marketElements}</>;
+    return (
+        <>
+            <BalanceModal
+                show={show}
+                setShow={setShow}
+                outcome={outcomeState}
+                question={question}
+                positionId={positionId}
+            />
+            {marketElements}
+        </>
+    );
 };
 export default ActiveMarkets;
