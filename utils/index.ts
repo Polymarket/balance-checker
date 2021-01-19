@@ -90,7 +90,7 @@ export async function getBalance({
  * @param {Array} object - the array of market objects fetched by getStaticProps from the api
  * @param {Array} properties - keys for the properties of the market objects
  * @param {string} query - the text coming from the search input
- *  @returns {boolean} - value indicating if search query was found
+ * @returns {boolean} - value indicating if search query was found
  * */
 
 export function searchMarkets<data>(
