@@ -1,27 +1,37 @@
-import React from "react";
-import { Col, Row, Container, Card, ListGroup } from "react-bootstrap";
-import { formatDiagnostic } from "typescript";
+import React, { useState } from "react";
+import { Col, Card, ListGroup } from "react-bootstrap";
 import { Market } from "../utils/constants";
 import { searchMarkets } from "../utils";
+import { getModalProps } from "../utils/hooks";
+import BalanceModal from "./modal";
 
-type PropsFunction = ({
-    market,
-    outcome,
-}: {
-    market: Market;
-    outcome: string;
-}) => void;
+
 type Props = {
     data: Market[];
     query: string;
-    handleClick: PropsFunction;
+  
 };
 
 const ActiveMarkets: React.FC<Props> = ({
     data,
     query,
-    handleClick,
+ 
 }): JSX.Element => {
+
+    const [show, setShow] = useState<boolean>(false);
+    const [outcome, setOutcome] = useState<string>("");
+    const [question, setQuestion] = useState<string>("");
+    const [positionId, setPositionId] = useState<string>("");
+
+
+    async function handleClick({ market, outcome }: { market: Market; outcome: string }): Promise<void> {
+        const _modalProps = await getModalProps({market, outcome})
+        setOutcome(_modalProps.outcomeName);
+        setQuestion(_modalProps.question);
+        setPositionId(_modalProps.positionId);
+        setShow(true);
+    }
+
     const resultMarkets = data.filter((market) =>
         searchMarkets<Market>(market, ["question", "description"], query),
     );
@@ -58,6 +68,13 @@ const ActiveMarkets: React.FC<Props> = ({
             </Col>
         );
     });
-    return <>{marketElements}</>;
+    return <>
+    <BalanceModal show={show}
+                  setShow={setShow}
+                  outcome={outcome}
+                  question={question}
+                  positionId={positionId}
+    />
+    {marketElements}</>;
 };
 export default ActiveMarkets;

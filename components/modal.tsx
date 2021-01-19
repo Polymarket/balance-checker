@@ -6,7 +6,7 @@ import { getBalance } from "../utils";
 type ModalProps = {
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
     question: string;
-    outcomeName: string;
+    outcome: string;
     positionId: string;
     show: boolean;
 };
@@ -14,13 +14,13 @@ type ModalProps = {
 const BalanceModal: React.FC<ModalProps> = ({
     setShow,
     question,
-    outcomeName,
+    outcome,
     positionId,
     show
    
 }): JSX.Element => {
     const [balance, setBalance] = useState<string | undefined>(undefined);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const [address, setAddress] = useState("");
 
     async function handleSubmit(
@@ -42,10 +42,10 @@ const BalanceModal: React.FC<ModalProps> = ({
             <Form onSubmit={handleSubmit}>
                 <Modal.Body>
                     <h6> {question} </h6>
-                    <h6>
+                    <span>
                         Enter a customer's address to get their balance for
-                        position: {outcomeName}
-                    </h6>
+                        position: <h6>{outcome}</h6>
+                    </span>
                     <Form.Group>
                         <Form.Label>Address</Form.Label>
                         <Form.Control
@@ -69,7 +69,11 @@ const BalanceModal: React.FC<ModalProps> = ({
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShow(false)}>
+                    <Button variant="secondary" onClick={() => {
+                                                                 setShow(false)
+                                                                 setBalance(undefined)
+                                                                 setErrorMessage("")
+                    }}>
                         Close
                     </Button>
                     <Button id="submit-button" variant="primary" type="submit">

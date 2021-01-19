@@ -1,45 +1,18 @@
 import React, { useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { Market, parentCollectionId, collateralToken } from "../utils/constants";
-import { getIndexSet, getCollectionId, getPositionId } from "../utils";
-import BalanceModal from "../components/modal";
+import { Market } from "../utils/constants";
 import SearchInput from "../components/searchInput";
 import ActiveMarkets from "../components/activeMarkets";
 
-export type Props = {
+ type Props = {
     data: Market[];
 };
 const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
-     const [show, setShow] = useState<boolean>(false);
-     const [outcomeName, setOutcomeName] = useState<string>("");
-     const [question, setQuestion] = useState<string>("");
-     const [positionId, setPositionId] = useState<string>("");
-    
-    const [query, setQuery] = useState("");
-
-
-  
-   async function handleClick({ market, outcome }: { market: Market; outcome: string }): Promise<void> {
-        const indexSet = getIndexSet({market, outcome});
-        const conditionId = market.conditionId;
-        const collectionId = await getCollectionId({parentCollectionId, conditionId, indexSet});
-        const positionId = await getPositionId({ collateralToken, collectionId });
-        setPositionId(positionId);
-        setQuestion(market.question);
-        setOutcomeName(outcome);
-        setShow(true);
-    }
-
+   const [query, setQuery] = useState("");
 
     return (
         <Container>
-            <BalanceModal
-                setShow={setShow}
-                question={question}
-                outcomeName={outcomeName}
-                positionId={positionId}
-                show={show}
-            />
+       
             <Row style={{ paddingTop: "50px", textAlign: "center" }}>
                 <Col>
                     <h1>Customer Balances</h1>
@@ -75,7 +48,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
                 <Col md={4} />
                 <Col md={4}>
                     <SearchInput
-                        onChangeSearchQuery={(_query) => setQuery(_query)}
+                        onChangeSearchQuery={(query) => setQuery(query)}
                     />
                 </Col>
                 <Col md={4} />
@@ -91,7 +64,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
                 <ActiveMarkets
                     data={data}
                     query={query}
-                    handleClick={handleClick}
+                   
                 />
             </Row>
         </Container>
