@@ -1,6 +1,6 @@
 
-import { Market, parentCollectionId, collateralToken } from "../utils/constants";
-import { getIndexSet, getCollectionId, getPositionId } from "../utils";
+import { Market, parentCollectionId, collateralToken } from "./constants";
+import { getIndexSet, getCollectionId, getPositionId } from ".";
 
 export async function getModalProps({ market, outcome }: { market: Market; outcome: string }): Promise<{ outcomeName: string; question: string; positionId: string; }> {
    
