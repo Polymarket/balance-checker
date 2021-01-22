@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import gstyles from "../styles/Home.module.scss";
 import { Market } from "../utils/constants";
 import { searchMarkets } from "../utils";
 import { getModalProps } from "../utils/hooks";
