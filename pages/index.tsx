@@ -21,7 +21,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
 
             <div className={styles.header}>
                 <div className={styles.content}>
-                    <PolymarketLogo />\
+                    <PolymarketLogo />
                 </div>
             </div>
 

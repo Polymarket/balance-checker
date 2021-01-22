@@ -40,14 +40,12 @@ const ActiveMarkets: React.FC<Props> = ({ data, query }): JSX.Element => {
                 <div className={styles.MarketWidget__name}>
                     {market.question}
                 </div>
-                <div>
-                    <ul className={styles.ul}>
-                        {market.outcomes.map((outcome: string) => (
-                            <a
-                                className={styles.grid}
-                                role="button"
-                                tabIndex={0}
-                                key={outcome}
+                <div className={styles.OutcomeButtons}>
+                 
+                        {market.outcomes.map((outcome: string, i) => (
+                        <div key={i}>
+                            <button
+                                className={styles.OutcomeButtonYes}
                                 onClick={() => handleClick({ market, outcome })}
                                 onKeyDown={() =>
                                     handleClick({ market, outcome })
@@ -57,9 +55,10 @@ const ActiveMarkets: React.FC<Props> = ({ data, query }): JSX.Element => {
                                 <div className={styles.description}>
                                     {outcome}
                                 </div>
-                            </a>
+                            </button>
+                           </div>
                         ))}
-                    </ul>
+               
                 </div>
             </div>
         );

@@ -67,8 +67,9 @@
     font-size: 14px;
     height: 100%;
     padding: 16px 18.9px 14px 18px;
-    padding-bottom: 68px; //14px + 54px;
+   
     position: relative;
+    margin: 10px;
 }
 .MarketWidget__price,
 .MarketWidget__SeeMore {
@@ -92,71 +93,8 @@
     letter-spacing: -0.00187324px;
     line-height: 19px;
 }
-.MarketWidget__ticker,
-.MarketWidget__category {
-    opacity: 0.4;
-}
 
-.MarketWidget__price {
-    background-color: #f2f2f2;
-    border-radius: 3px;
-    margin-left: 0px;
-    padding: 3.34px 7.81px 3.1px 5.58px;
-}
-.MarketWidget__Top:after {
-    clear: both;
-    content: "";
-    display: block;
-}
-.MarketWidget__Footer {
-    bottom: 14px;
-    display: flex;
-    grid-template-columns: 33%;
-    margin-top: 15px;
-    position: absolute;
-}
 
-.MarketWidget__StatBox {
-    //flex: 1;
-    float: left;
-    margin-right: 25px;
-    text-align: left;
-}
-
-.MarketWidget__StatName {
-    color: #000000;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: normal;
-    /* identical to box height, or 100% */
-
-    letter-spacing: -0.00160563px;
-    line-height: 12px;
-
-    //mix-blend-mode: normal;
-    opacity: 0.5;
-}
-
-.MarketWidget__Volume {
-    color: #000000;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: normal;
-    /* identical to box height, or 100% */
-
-    letter-spacing: -0.00187324px;
-    line-height: 14px;
-}
-
-.MarketWidget__percent_change {
-    font-size: 12px;
-    margin-left: 5px;
-}
-.ul {
-    width: 70%;
-    margin: auto;
-    padding: 0;
-}
 .grid {
     display: flex;
     align-items: center;
@@ -166,6 +104,29 @@
     margin-top: 3rem;
     text-align: center;
   }
+  .OutcomeButtons {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-gap: 11px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+}
+
+.OutcomeButtonYes,
+.OutcomeButtonNo {
+    background: rgba(0, 0, 0, 0.04);
+    border: none;
+    border-radius: 2px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: normal;
+    height: 50px;
+    letter-spacing: -0.00214085px;
+    line-height: 23px;
+    padding-right: 10px;
+    text-align: right;
+    width: 107px;
+}
   @media (max-width: 600px) {
     .grid {
       width: 100%;
