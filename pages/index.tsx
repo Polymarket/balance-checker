@@ -26,7 +26,7 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
             </div>
 
             <main className={styles.main}>
-                <h1 className={styles.title}>Blance Checker</h1>
+                <h1 className={styles.title}>Balance Checker</h1>
 
                 <div className={styles.grid}>
                     <p className={styles.description}>
