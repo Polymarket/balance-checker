@@ -1,68 +1,56 @@
+import Head from "next/head";
 import React, { useState } from "react";
-import { Col, Row, Container } from "react-bootstrap";
 import { Market } from "../utils/constants";
 import SearchInput from "../components/searchInput";
 import ActiveMarkets from "../components/activeMarkets";
+import styles from "../styles/Home.module.scss";
+import PolymarketLogo from "../public/polymarket.svg";
 
 type Props = {
     data: Market[];
 };
 const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
-    const [query, setQuery] = useState("");
+    const [searcQuery, setSearchQuery] = useState("");
 
     return (
-        <Container>
-            <Row style={{ paddingTop: "50px", textAlign: "center" }}>
-                <Col>
-                    <h1>Customer Balances</h1>
-                </Col>
-            </Row>
+        <div className={styles.App_Container}>
+            <Head>
+                <title>PM Withdrawal Checker</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-            <Row style={{ textAlign: "center" }}>
-                <Col md={4} />
-                <Col md={4}>
-                    <h6>Select a market outcome to find user balances </h6>
-                </Col>
-                <Col md={4} />
-            </Row>
+            <div className={styles.header}>
+                <div className={styles.content}>
+                    <PolymarketLogo />
+                </div>
+            </div>
 
-            <Row
-                style={{
-                    paddingTop: "30px",
-                    paddingBottom: "30px",
-                    textAlign: "center",
-                }}
-            >
-                <Col>
-                    <h2 style={{ textAlign: "center" }}>Active Markets</h2>
-                </Col>
-            </Row>
-            <Row
-                style={{
-                    paddingTop: "30px",
-                    paddingBottom: "30px",
-                    textAlign: "center",
-                }}
-            >
-                <Col md={4} />
-                <Col md={4}>
+            <main className={styles.main}>
+                <h1 className={styles.title}>Blance Checker</h1>
+
+                <div className={styles.grid}>
+                    <p className={styles.description}>
+                        Select a market outcome to find user balances{" "}
+                    </p>
+                </div>
+
+                <div className={styles.grid}>
+                    <div className={styles.content}>
+                        <h2 style={{ textAlign: "center" }}>Active Markets</h2>
+                    </div>
+                </div>
+                <div className={styles.grid}>
                     <SearchInput
-                        onChangeSearchQuery={(_query) => setQuery(_query)}
+                        onChangeSearchQuery={(query) => setSearchQuery(query)}
                     />
-                </Col>
-                <Col md={4} />
-            </Row>
-            <Row
-                style={{
-                    paddingTop: "30px",
-                    paddingBottom: "30px",
-                    textAlign: "center",
-                    minWidth: "100%",
-                }}
-            >
-                <ActiveMarkets data={data} query={query} />
-            </Row>
-        </Container>
+                </div>
+                <div className={styles.MarketsBoard}>
+                    <div className={styles.MarketsBoard_Widgets}>
+                        <ActiveMarkets data={data} query={searcQuery} />
+                    </div>
+                </div>
+            </main>
+        </div>
     );
 };
 export async function getStaticProps(): Promise<
@@ -80,7 +68,7 @@ export async function getStaticProps(): Promise<
     }
 
     return {
-        props: { data }, // will be passed to the page component as props
+        props: { data },
     };
 }
 

@@ -1,3 +1,42 @@
+.App {
+  text-align: center;
+}
+
+.App_Container{
+  max-width: 420px;
+  padding: 26px 34px 24px;
+  margin: auto;
+  text-align: center;
+  
+}
+
+.form {
+  margin: 25px 0;
+}
+
+.Form__Col input, .Form__Col textarea {
+  border: 1px solid #d8d8d8;
+  border-radius: 2px;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 17.5px 20px;
+  width: 100%;
+}
+.button {
+  cursor: pointer;
+  background: #1652f0;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -.00214085px;
+  line-height: 23px;
+  padding: 18px 31px 17px;
+  text-align: center;
+  margin-top: 22px;
+  width: 100%;
+}
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -78,6 +117,7 @@
   flex-wrap: wrap;
   max-width: 800px;
   margin-top: 3rem;
+  text-align: center;
 }
 
 .card {
@@ -113,6 +153,23 @@
 .logo {
   height: 1em;
 }
+.MarketsBoard__Header {
+  float: left;
+}
+.MarketsBoard__Buttons {
+  display: none; /* NOTE: Hidden as we only use grid for now */
+  float: right;
+}
+.MarketsBoard__Widgets {
+  clear: both;
+}
+.MarketsBoard__Widgets.grid {
+  column-gap: 25px;
+  display: grid;
+  grid-template-columns: 33%;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 19px;
+}
 
 @media (max-width: 600px) {
   .grid {
@@ -120,3 +177,5 @@
     flex-direction: column;
   }
 }
+
+
