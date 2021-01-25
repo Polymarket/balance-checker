@@ -26,8 +26,8 @@ const BalanceModal: React.FC<ModalProps> = ({
     ): Promise<void> {
         e.preventDefault();
         try {
-            const _balance = await getBalance({ address, positionId });
-            setBalance((+_balance / 1000000).toFixed(6));
+            const balance = await getBalance({ address, positionId });
+            setBalance((+balance / 1000000).toFixed(6));
         } catch (error) {
             setErrorMessage(error.message);
         }
