@@ -35,11 +35,6 @@ const BalanceChecker: React.FC<Props> = ({ data }): JSX.Element => {
                 </div>
 
                 <div className={styles.grid}>
-                    <div className={styles.content}>
-                        <h2 style={{ textAlign: "center" }}>Active Markets</h2>
-                    </div>
-                </div>
-                <div className={styles.grid}>
                     <SearchInput
                         onChangeSearchQuery={(query) => setSearchQuery(query)}
                     />

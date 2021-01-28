@@ -3,7 +3,6 @@
 }
 
 .App_Container{
-  max-width: 420px;
   padding: 26px 34px 24px;
   margin: auto;
   text-align: center;
@@ -47,7 +46,7 @@
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 1rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -88,7 +87,7 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .title,
@@ -116,7 +115,7 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
-  margin-top: 3rem;
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -152,6 +151,19 @@
 
 .logo {
   height: 1em;
+}
+.MarketsBoard_Widgets {
+  column-gap: 25px;
+  display: grid;
+  grid-column-gap: 25px;
+  grid-template-columns: repeat(3,1fr);
+  padding: 0;
+  grid-row-gap: 19px;
+  row-gap: 19px;
+  margin-top: 1.5625rem;
+  @media screen and (max-width: 1024px){
+    grid-template-columns: repeat(1,1fr);
+  }
 }
 .MarketsBoard__Header {
   float: left;
