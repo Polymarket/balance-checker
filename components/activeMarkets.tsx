@@ -23,10 +23,10 @@ const ActiveMarkets: React.FC<Props> = ({ data, query }): JSX.Element => {
         market: Market;
         outcome: string;
     }): Promise<void> {
-        const _modalProps = await getModalProps({ market, outcome });
-        setMarketOutcome(_modalProps.outcomeName);
-        setQuestion(_modalProps.question);
-        setPositionId(_modalProps.positionId);
+        const modalProps = await getModalProps({ market, outcome });
+        setMarketOutcome(outcome);
+        setQuestion(modalProps.question);
+        setPositionId(modalProps.positionId);
         setShow(true);
     }
 
