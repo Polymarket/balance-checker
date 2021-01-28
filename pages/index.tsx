@@ -58,7 +58,7 @@ export async function getStaticProps(): Promise<
     | { props: { data: Market[] }; notFound?: undefined }
 > {
     const res = await fetch(
-        `https://strapi-matic.poly.market/markets?active=true&_sort=volume:desc`,
+        `https://strapi-matic.poly.market/markets?active=true&_sort=volume:desc?_limit=-1`,
     );
     const data: Market[] = await res.json();
     if (!data) {
