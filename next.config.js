@@ -32,10 +32,10 @@ module.exports = {
 
     return config;
   },
-  // async headers () {
-  //   return [{
-  //     source: "/(.*)",
-  //     headers: securityHeaders
-  //   }];
-  // }
+  async headers () {
+    return [{
+      source: "/(.*)",
+      headers: securityHeaders
+    }];
+  }
 };
