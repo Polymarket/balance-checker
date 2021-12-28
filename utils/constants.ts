@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-const MATIC_NODE: string = "wss://rpc-mainnet.maticvigil.com/ws";
+const MATIC_NODE: string = "wss://ws-matic-mainnet.chainstacklabs.com";
 const provider = new ethers.providers.WebSocketProvider(MATIC_NODE);
 const { abi } = require("./ConditionalTokens.json");
 const CONTRACT_ADDRESS: string = "0x4D97DCd97eC945f40cF65F87097ACe5EA0476045";
