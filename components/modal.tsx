@@ -29,7 +29,7 @@ const BalanceModal: React.FC<ModalProps> = ({
             const balance = await getBalance({ address, positionId });
             setBalance((+balance / 1000000).toFixed(6));
         } catch (error) {
-            setErrorMessage(error.message);
+            setErrorMessage((error as any).message);
         }
     }
     return (
