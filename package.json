@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p $PORT",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider next start -p $PORT",
     "test": "jest --detectOpenHandles --watchAll=false --forceExit",
     "docs": "jsdoc -c jsdoc.json"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
