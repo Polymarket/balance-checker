@@ -36,7 +36,10 @@ const ActiveMarkets: React.FC<Props> = ({ data, query }): JSX.Element => {
 
     const marketElements = resultMarkets.map((market: Market) => {
         return (
-            <div className={styles.MarketWidget} key={market.marketMakerAddress}>
+            <div
+                className={styles.MarketWidget}
+                key={market.marketMakerAddress}
+            >
                 <div className={styles.MarketWidget__name}>
                     {market.question}
                 </div>

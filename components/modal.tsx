@@ -21,9 +21,9 @@ const BalanceModal: React.FC<ModalProps> = ({
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [address, setAddress] = useState("");
 
-    async function handleSubmit(
+    const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
-    ): Promise<void> {
+    ): Promise<void> => {
         e.preventDefault();
         try {
             const balance = await getBalance({ address, positionId });
@@ -31,9 +31,9 @@ const BalanceModal: React.FC<ModalProps> = ({
         } catch (error) {
             setErrorMessage((error as any).message);
         }
-    }
+    };
     return (
-        <Modal show={show} onHide={setShow}>
+        <Modal show={show} onHide={() => setShow}>
             <Modal.Header closeButton>
                 <Modal.Title>Customer Balance</Modal.Title>
             </Modal.Header>
